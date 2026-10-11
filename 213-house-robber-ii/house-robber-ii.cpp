@@ -3,12 +3,15 @@ public:
     int helper(vector<int>& nums, int st, int end){
        int n = nums.size();
         vector<int> dp(n);
-       dp[0] = nums[st];
-       dp[1] = max(nums[st],nums[st+1]);
+       int pre1 = nums[st];
+       int pre2 = max(nums[st],nums[st+1]);
+       int result = pre2;
        for(int i=st+2,j=2;i<=end;i++,j++){
-            dp[j]= max(dp[j-1],dp[j-2] + nums[i]);
+            result = max(pre2,pre1+ nums[i]);
+            pre1 = pre2;
+            pre2 = result;
        } 
-       return dp[n-2];
+       return result;
 }
 
     int rob(vector<int>& nums) {
